@@ -2,7 +2,7 @@ FROM alpine:3.7
 
 ARG NETATALK_VERSION=3.1.11
 
-RUN apk add --no-cache --update avahi cracklib db libldap krb5-libs \
+RUN apk add --no-cache --update avahi cracklib db libldap krb5-libs wget \
  && apk add --no-cache --update --virtual .build-dep \
       make \
       g++ \
