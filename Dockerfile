@@ -2,12 +2,6 @@ FROM alpine:3.8
 
 ARG NETATALK_VERSION=3.1.11
 
-ENV UID=1000 \
-    GID=1000 \
-    GROUP=netatalk \
-    USER=netatalk \
-    PASSWORD=supersecretpassword
-
 RUN apk add --no-cache --update tzdata avahi cracklib db libldap krb5-libs libgcrypt \
  && apk add --no-cache --update --virtual .build-dep \
       wget \
