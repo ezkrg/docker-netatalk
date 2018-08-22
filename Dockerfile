@@ -43,11 +43,6 @@ RUN apk add --no-cache --update tzdata avahi cracklib db libldap krb5-libs libgc
  && rm -rf /tmp/* \
  && apk del .build-dep
 
-ADD entrypoint.sh /entrypoint.sh
-ADD afp.conf /etc/afp.conf
-
 EXPOSE 548
-
-ENTRYPOINT [ "/entrypoint.sh" ]
 
 CMD [ "/sbin/netatalk", "-d", "-F", "/etc/afp.conf" ]
