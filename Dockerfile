@@ -1,9 +1,16 @@
-FROM alpine:3.7
+FROM alpine:3.8
 
 ARG NETATALK_VERSION=3.1.11
 
-RUN apk add --no-cache --update avahi cracklib db libldap krb5-libs wget \
+ENV UID=1000 \
+    GID=1000 \
+    GROUP=netatalk \
+    USER=netatalk \
+    PASSWORD=supersecretpassword
+
+RUN apk add --no-cache --update tzdata avahi cracklib db libldap krb5-libs libgcrypt \
  && apk add --no-cache --update --virtual .build-dep \
+      wget \
       make \
       g++ \
       db-dev \
@@ -42,6 +49,11 @@ RUN apk add --no-cache --update avahi cracklib db libldap krb5-libs wget \
  && rm -rf /tmp/* \
  && apk del .build-dep
 
+ADD entrypoint.sh /entrypoint.sh
+ADD afp.conf /etc/afp.conf
+
 EXPOSE 548
 
-CMD [ "/sbin/netatalk", "-d" ]
+ENTRYPOINT [ "/entrypoint.sh" ]
+
+CMD [ "/sbin/netatalk", "-d", "-F", "/etc/afp.conf" ]
