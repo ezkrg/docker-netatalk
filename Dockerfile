@@ -45,4 +45,4 @@ RUN apk add --no-cache --update tzdata avahi cracklib db libldap krb5-libs libgc
 
 EXPOSE 548
 
-CMD [ "/sbin/netatalk", "-d", "-F", "/etc/afp.conf" ]
+CMD [ "/sbin/netatalk", "-d", "-F", "/etc/netatalk/afp.conf" ]
